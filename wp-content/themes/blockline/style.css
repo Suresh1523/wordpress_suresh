@@ -1,0 +1,405 @@
+/*
+Theme Name: Blockline
+Theme URI: https://themehunk.com/blockline/
+Author: ThemeHunk
+Author URI: https://www.themehunk.com
+Description: Blockline is a Fast & lightweight Block Based Full Site Editing WordPress Theme. With FSE, users can create custom templates for different pages or sections of the site, as well as use widgets and other design elements to control the appearance and layout of the site. We believe it will revolutionize the way you create and customize your WordPress site. With Blockline you’ll have access to a range of pre-designed templates and custom block patterns, making it easy to create stunning pages and posts without any coding knowledge.
+Version: 1.0.6
+Requires at least: 6.0
+Tested up to: 6.4.2
+Requires PHP: 5.6
+License: GNU General Public License v3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
+WordPress Available:  yes
+Requires License:     no
+Text Domain: blockline
+Tags: full-site-editing, block-patterns, one-column, custom-colors, custom-menu, custom-logo, editor-style, featured-images, rtl-language-support, theme-options, threaded-comments, translation-ready, wide-blocks
+*/
+
+/*
+ * Font smoothing.
+ * This is a niche setting that will not be available via Global Styles.
+ * https://github.com/WordPress/gutenberg/issues/35934
+ */
+
+ :root {
+	--wp--custom--core-button--spacing--padding--left: 40px;
+	--wp--custom--core-button--spacing--padding--right: 8px;
+	--wp--custom--core-button--spacing--padding--top: 8px;
+	--wp--custom--core-button--spacing--padding--bottom: 10px;
+	--wp--custom--core-button--color:  var(--wp--preset--color--white);
+	--wp--custom--core-button--color--background: var(--wp--preset--color--primary);
+	--wp--custom--core-button--color-hover:  var(--wp--preset--color--primary);
+	--wp--custom--core-button--color--background-hover: var(--wp--preset--color--secondary);
+	--wp--custom--core-button--box-sizing: border-box;
+	--wp--custom--core-button--word-break: border-box;
+	--wp--custom--core-button--text-align: center;
+	--wp--custom--core-button--border-radius--top-left: 0;
+	--wp--custom--core-button--border-radius--top-right: 0;
+	--wp--custom--core-button--border-radius--bottom-left: 0;
+	--wp--custom--core-button--border-radius--bottom-right: 0;
+	--wp--custom--core-button--typography--font-size: var(--wp--preset--font-size--small);
+	--wp--custom--core-button--typography--font-weight: 500;
+	--wp--custom--core-button--line-height: 1.7; }
+  
+  *,
+  *::before,
+  *::after {
+	box-sizing: inherit; }
+  
+  html {
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased; }
+  
+  header p a,
+  footer p a {
+	text-decoration: none; }
+
+/*
+ * Text and navigation link styles.
+ * Necessary until the following issue is resolved in Gutenberg:
+ * https://github.com/WordPress/gutenberg/issues/27075
+ */
+
+a {
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.25ch;
+}
+
+a:hover,
+a:focus {
+	text-decoration-style: dashed;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+.editor-styles-wrapper .wp-site-blocks > * + *,
+.editor-styles-wrapper .wp-site-blocks > * + * + *,
+.wp-site-blocks > * + *,
+.wp-site-blocks > * + * + * {
+  margin: 0; }
+
+
+.wp-block-navigation .wp-block-navigation-item a:hover,
+.wp-block-navigation .wp-block-navigation-item a:focus {
+	text-decoration-style: solid;
+}
+
+/*
+ * Search and File Block button styles.
+ * Necessary until the following issues are resolved in Gutenberg:
+ * https://github.com/WordPress/gutenberg/issues/36444
+ * https://github.com/WordPress/gutenberg/issues/27760
+ */
+
+.wp-block-search__button,
+.wp-block-file .wp-block-file__button {
+	background-color: var(--wp--preset--color--primary);
+	border-radius: 0;
+	border: none;
+	color: var(--wp--preset--color--background);
+	font-size: var(--wp--preset--font-size--medium);
+	padding: calc(.667em + 2px) calc(1.333em + 2px);
+}
+
+/*
+ * Button hover styles.
+ * Necessary until the following issue is resolved in Gutenberg:
+ * https://github.com/WordPress/gutenberg/issues/27075
+ */
+
+.wp-block-search__button:hover,
+.wp-block-file .wp-block-file__button:hover,
+.wp-block-button__link:hover {
+	opacity: 0.90;
+}
+
+/*
+ * Responsive menu container padding.
+ * This ensures the responsive container inherits the same
+ * spacing defined above. This behavior may be built into
+ * the Block Editor in the future.
+ */
+
+.wp-block-navigation__responsive-container.is-menu-open {
+	padding-top: var(--wp--custom--spacing--outer);
+	padding-bottom: var(--wp--custom--spacing--large);
+	padding-right: var(--wp--custom--spacing--outer);
+	padding-left: var(--wp--custom--spacing--outer);
+}
+
+/*image border style*/
+.wp-block-image.is-style-blockline-border img{
+    border: calc(3 * 1px) solid var(--wp--preset--color--accent);
+}
+/*tag style*/
+.taxonomy-post_tag.wp-block-post-terms a{ 
+padding:5px 10px;
+margin-right:10px;
+background:var(--wp--preset--color--accent);
+color:var(--wp--preset--color--black);
+border-radius:4px;
+font-size:var(--wp--preset--font-size--tiny);
+}
+
+
+.taxonomy-post_tag.wp-block-post-terms span{
+display:none;
+}
+
+/*
+ * Link Styles
+ */
+
+a:not(
+	.wp-block-search__button,
+	.wp-block-button__link
+) {
+	text-underline-offset: .1rem;
+}
+
+a:not(
+	.wp-block-search__button,
+	.wp-block-button__link
+):focus {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+.thunk-blog-pattern .wp-block-post-excerpt__more-link{
+	background: var(--wp--preset--color--bg-sec);
+	color: var(--wp--preset--color--foreground);
+	text-decoration: none;
+	padding: 7px 9px;
+}
+.thunk-blog-pattern .wp-block-post-title a{
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+}
+.woocommerce .quantity .qty{
+	padding-left: 0;
+	padding-right: 0;
+}
+.woocommerce div.product .woocommerce-tabs ul.tabs li{
+	margin-right: 12px;
+}
+
+
+/* custome css */
+
+
+.wp-block-button__link.wp-element-button {
+	display: flex;
+	align-items: center;
+  }
+  .wp-block-button__link.wp-element-button img {
+	margin-right: 5px;
+  }
+  .wp-block-group.has-bg-sec-background-color.has-background.is-layout-constrained.wp-container-core-group-layout-6.wp-block-group-is-layout-constrained {
+	  padding: 72px;
+	  margin: 127px;
+	  margin-top: 127px;
+	  margin-bottom: 127px;
+	  border-bottom: unset;
+	  border-bottom-width: unset;
+	  border-bottom-color: unset;
+	  background-color: #242c40 !important;
+  }
+  .wp-block-image.aligncenter.size-full.is-resized.has-custom-border img {
+	margin-top: -355px;
+	margin-right: 10px;
+	opacity: 50%;
+  }
+  /* .wp-block-heading.has-text-align-left.has-text-color.has-link-color.wp-elements-6aee8ed349596a002e2052abf7baf81f {
+	color: #fff;
+  }
+  .has-text-align-left.has-small-font-size {
+	color: #fff;
+  } */
+  .wp-block-button .wp-block-button__link {
+	background-color: #1883c4;
+	border-radius: 4px;
+	/* color: #fff; */
+  }
+  .wp-block-column.has-border-color.is-layout-flow.wp-block-column-is-layout-flow {
+	background-color: #6d7280;
+	border: unset;
+  }
+  .wp-block-column.has-border-color.is-layout-flow.wp-block-column-is-layout-flow, .wp-block-image.aligncenter.size-full.has-custom-border.is-style-rounded img {
+	border: unset;
+	margin-top: -78px;
+  }
+  .wp-block-column.has-border-color.is-layout-flow.wp-block-column-is-layout-flow {
+	padding-bottom: 50px !important;
+  }
+  .wp-block-columns.is-layout-flex.wp-container-core-columns-layout-2.wp-block-columns-is-layout-flex {
+	margin-top: 200px !important;
+  }
+  .wp-block-group.has-background.is-layout-constrained.wp-container-core-group-layout-9.wp-block-group-is-layout-constrained {
+	margin: 115px;
+	  margin-top: 115px;
+	  margin-bottom: 115px;
+	background-color: #222940;
+	/* color: #fff; */
+	border-bottom: unset;
+  }
+  .wp-block-group.has-background.is-layout-constrained.wp-container-core-group-layout-9.wp-block-group-is-layout-constrained p {
+	font-size: 12px !important;
+	width: 65%;
+  }
+  .wp-block-group.alignwide.is-layout-flow.wp-block-group-is-layout-flow {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  .wp-block-column.has-border-color.is-layout-flow.wp-block-column-is-layout-flow p {
+	width: 100% !important;
+  }
+  .sp-testimonial-free {
+	width: 75%;
+	background-color: #6d7280 !important;
+	padding: 10px;
+  }
+  .sp-testimonial-item.swiper-slide.swiper-slide-duplicate.swiper-slide-active.swiper-slide-duplicate-prev {
+	padding-top: 100px;
+  }
+  .sp-testimonial-free img {
+	margin-top: -55px;
+  }
+  /* .sp-testimonial-title h3 {
+	color: #fff !important;
+  } */
+  .sp-testimonial-client-testimonial p {
+	font-size: 12px !important;
+  }
+  .wp-block-group.has-bg-sec-background-color.has-background.is-layout-constrained.wp-container-core-group-layout-7.wp-block-group-is-layout-constrained{
+	margin: 115px;
+	margin-top: 115px;
+	margin-bottom: 115px;
+	background-color: #222940 !important;
+  /* color: #fff; */
+  margin-bottom: 50px !important;
+  border-bottom: unset;
+  }
+  .wp-block-group.alignwide.is-layout-flow.wp-block-group-is-layout-flow p {
+	font-size: 12px !important;
+	width: 65%;
+  }
+  /* .sp-testimonial-client-testimonial p {
+	color: #fff;
+  } */
+  #sp-testimonial-free-38 {
+	padding-top: 75px !important;
+	margin-left: 175px !important;
+  }
+  .sp-testimonial-free-section .sp-testimonial-client-image img {
+   width: 150px;
+  }
+  /* .wp-block-group.has-background.is-layout-constrained.wp-block-group-is-layout-constrained h5 {
+	font-size: 44px !important;
+	text-align: center;
+  }
+  .wp-block-group.has-background.is-layout-constrained.wp-block-group-is-layout-constrained p {
+	font-size: 14px !important;
+	text-align: center;
+  } */
+  .wp-block-heading.has-text-align-left.has-text-color.has-link-color.wp-elements-6aee8ed349596a002e2052abf7baf81f {
+	font-size: 48px !important;
+	text-align: center;
+  }
+  .has-text-align-left.has-small-font-size {
+	text-align: center;
+	font-size: 14px !important;
+  }
+  .social_icons {
+	text-align: center;
+  }
+  .social_icons a {
+	margin-right: 10px;
+  }
+  .body {
+	color: #fff;
+  }
+  #toggle-container button {
+	background: transparent;
+	border: unset;
+  }
+  #toggle-container button {
+	background: transparent;
+	border: unset;
+  }
+  #toggle-container button i {
+	font-size: 25px;
+	color: #fff;
+	cursor: pointer;
+  }
+  #modal-1-content {
+	margin-right: -440px;
+  }
+
+  /* Dark mode styles */
+body.dark-mode {
+	background-color: #fff;
+	color: #000;
+  }
+  .dark-mode .content .has-bg-sec-background-color {
+	background-color: #fff;
+  }
+  .dark-mode .content .wp-block-group.has-bg-sec-background-color.has-background.is-layout-constrained.wp-container-core-group-layout-7.wp-block-group-is-layout-constrained {
+	background-color: #b3b7c4 !important;
+  }
+  .dark-mode .content .wp-block-group.has-background.is-layout-constrained.wp-container-core-group-layout-9.wp-block-group-is-layout-constrained {
+	background-color: #b3b7c4 !important;
+  }
+  .dark-mode .content .wp-block-group.has-background.is-layout-constrained.wp-container-core-group-layout-9.wp-block-group-is-layout-constrained {
+	background-color: #bfc4d2;
+  }
+  .dark-mode .content .wp-block-column.has-border-color.is-layout-flow.wp-block-column-is-layout-flow {
+	background-color: #9aa4bf;
+  }
+  .dark-mode .content #toggle-container button i {
+	color: #000;
+  }
+
+  @media (max-width: 768px) {
+	.wp-block-group.has-bg-sec-background-color.has-background.is-layout-constrained.wp-container-core-group-layout-7.wp-block-group-is-layout-constrained {
+		margin: 20px;
+	  }
+	  .sp-testimonial-free {
+		width: 100%;
+		background-color: #6d7280 !important;
+		padding: 10px;
+	  }
+	  .sp-testimonial-free-section.swiper-initialized, .sp-testimonial-free-section:not(.swiper-initialized, .tfree-layout-grid) {
+		margin: 0 30px;
+	  }
+	  .wp-block-group.has-background.is-layout-constrained.wp-container-core-group-layout-9.wp-block-group-is-layout-constrained {
+		margin: 20px;
+	  }
+	  .wp-block-column.has-border-color.is-layout-flow.wp-block-column-is-layout-flow {
+		margin-bottom: 115px;
+	  }
+	  .wp-block-group.has-background.is-layout-constrained.wp-container-core-group-layout-9.wp-block-group-is-layout-constrained p {
+		font-size: 12px !important;
+		width: 100%;
+	  }
+	  .wp-block-group.has-background.is-layout-constrained.wp-container-core-group-layout-9.wp-block-group-is-layout-constrained {
+		padding-bottom: 10px !important;
+	  }
+	  .wp-block-group.alignwide.is-layout-flow.wp-block-group-is-layout-flow p {
+		font-size: 12px !important;
+		width: 100%;
+	  }
+	  #sp-testimonial-free-38 {
+		margin-left: 35px !important;
+		margin-right: 35px !important;
+	  }
+	  .wp-block-group.is-nowrap.is-layout-flex.wp-container-core-group-layout-1.wp-block-group-is-layout-flex a {
+		margin-left: -34px;
+	  }
+	  .wp-block-site-logo.is-default-size img {
+		height: auto;
+		width: 100px;
+	  }
+  }
